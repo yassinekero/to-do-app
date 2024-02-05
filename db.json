@@ -1,0 +1,80 @@
+
+    {
+        "to-do-lists" : [
+            {
+              "id" : 1,
+      "name": "ToDoList 1",
+      "tasks": [
+        {
+          "name": "Task 1",
+          "description": "Description for Task 1",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        },
+        {
+          "name": "Task 2",
+          "description": "Description for Task 2",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        },
+        {
+          "name": "Task 3",
+          "description": "Description for Task 3",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        }
+      ],
+      "days": [1, 2]
+    },
+    {
+      "id" : 2,
+      "name": "ToDoList 2",
+      "tasks": [
+        {
+          "name": "Task 1",
+          "description": "Description for Task 1",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        },
+        {
+          "name": "Task 2",
+          "description": "Description for Task 2",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        },
+        {
+          "name": "Task 3",
+          "description": "Description for Task 3",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        }
+      ],
+      "days": [0,4]
+    },
+    {
+      "id" : 3,
+      "name": "ToDoList 3",
+      "tasks": [
+        {
+          "name": "Task 1",
+          "description": "Description for Task 1",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        },
+        {
+          "name": "Task 2",
+          "description": "Description for Task 2",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        },
+        {
+          "name": "Task 3",
+          "description": "Description for Task 3",
+          "startTime": "2024-02-04T00:00:00.000Z",
+          "endTime": "2024-02-04T00:00:00.000Z"
+        }
+      ],
+      "days": [3]
+    }
+        ]
+}

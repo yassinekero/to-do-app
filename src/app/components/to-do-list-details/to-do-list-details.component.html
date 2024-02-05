@@ -1,0 +1,15 @@
+<div id="card">
+    <div class="card-title">{{ toDoList.name }}</div>
+    <div class="card-content">
+      <ul>
+        @for ( task of toDoList.tasks; track $index) 
+        {
+          <li>{{ task.name }}</li>
+        }
+        
+      </ul>
+    </div>
+</div>
+
+
+

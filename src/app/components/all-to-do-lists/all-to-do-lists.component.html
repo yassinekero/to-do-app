@@ -1,0 +1,7 @@
+<div class="grid-container">
+    @for (toDoList of toDoLists; track $index) 
+  {
+    <app-to-do-list  class="card" [toDoList]="toDoList"></app-to-do-list>
+  }
+  <div class="card" id="add-todo">+</div>
+  </div>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, WeekDay } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { ToDoListDetailsComponent} from './components/to-do-list-details/to-do-list-details.component';
 import { ToDoList } from './interfaces/to-do-list';
 import { ToDoListService } from './services/to-do-list.service';
 @Component({
@@ -11,7 +10,7 @@ import { ToDoListService } from './services/to-do-list.service';
   [
     CommonModule,
      RouterOutlet,
-    ToDoListDetailsComponent
+    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

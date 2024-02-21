@@ -3,7 +3,7 @@ import { Task } from "./task";
 
 export interface ToDoList {
     id?: number,
-    name: string,
+    title: string,
     tasks: Task[],
     days: number[],
 }

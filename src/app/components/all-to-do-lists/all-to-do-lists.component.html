@@ -1,7 +1,12 @@
 <div class="grid-container">
     @for (toDoList of toDoLists; track $index) 
   {
-    <app-to-do-list  class="card" [toDoList]="toDoList"></app-to-do-list>
+
+    
+   <app-to-do-list routerLink="to-do/{{toDoList.id}}" class="card" [toDoList]="toDoList"></app-to-do-list>
   }
-  <div class="card" id="add-todo">+</div>
+
+  
+  <a class="card" id="add-todo" routerLink="to-do/create">+</a>
+
   </div>

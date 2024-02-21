@@ -1,8 +1,10 @@
 export interface Task
 {
     id ?: number
-    name : string,
-    description : string,
-    startTime : Date,
-    endTime : Date
+    title : string,
+    description : string | undefined,
+    startTime : Date | undefined,
+    endTime : Date | undefined,
+    completed : boolean,
+    tag : string | undefined
 }

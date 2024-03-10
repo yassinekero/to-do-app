@@ -1,0 +1,7 @@
+
+@mixin button-styles($bg-color)
+{
+
+    border-radius: 5px;
+    background-color:  $bg-color;
+}

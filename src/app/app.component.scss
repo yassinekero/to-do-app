@@ -1,16 +1,31 @@
 @import '../styles.scss';
-
+@import "../app/styles/colors.scss";
 
 * {
     padding: 0px;
     margin: 0;
-
+    font-family: "century-gothic", sans-serif;
+    user-select: none;
 }
 
-
-h1 {
-    width: fit-content;
-    margin: 0 auto;
-    margin-bottom: 15px;
+#wrapper
+{
+    display: flex;
+width: 100vw;
+height: 100vh;
+background-color: $background-color;
+}
+#wrapper::-webkit-scrollbar { 
+    display: none !important;  
+}
+.box 
+{
+    height: 100vh;
+}
+#outlet
+{
+  flex: 1;
+    height: 100vh;
 }
 
+   

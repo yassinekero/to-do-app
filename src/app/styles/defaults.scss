@@ -1,0 +1,7 @@
+#wrapper {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+}
+#wrapper::-webkit-scrollbar { 
+    display: none;  
+}

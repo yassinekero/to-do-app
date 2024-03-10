@@ -1,3 +1,127 @@
-<h1>
-    {{ToDoList?.title}}
-</h1>
+<div id="wrapper">
+  <div id="tasks-section">
+    <div class="top">
+      <h1>
+        {{ToDoList?.title}}
+      </h1>
+      <div class="add-task">
+        <div id="task-input">
+          <input id="title-input" type="text" name="task-title" placeholder="+  Add New Task" (keyup.enter)="addTask()"
+            [(ngModel)]="newTask.title">
+          <div class="options" id="time-options">
+            <div class="time-picker" (click)="displayTimePicker()">
+              <img src="../../../assets/icons/calendar-icon.png">
+              <div>{{newTask.startDate | customDate  }}</div>
+            </div>
+            <div class="dropdown" [style.display]="displayTimePickerStyle">
+              @if(displayTimePickerStyle == "block")
+              {
+              <app-task-time [task]="newTask"></app-task-time>
+              }
+
+            </div>
+          </div>
+          <div class="options" id="task-options">
+            <img (click)="displayDropDown()" src="../../../assets/icons/dropdown-icon.png">
+            <div class="dropdown" [style.display]="displayStyle">
+              <div class="section priority-section">
+                <div class="section-name">Priority</div>
+
+                <app-priorities [task]="newTask" [selectedColor]="selectedColor"></app-priorities>
+
+              </div>
+
+              <div class="section add-to-section">
+                <div class="section-name">Add to</div>
+                <div class="add-to add-to-list">
+                  <img class="dropdown-img" src="../../../assets/icons/list-icon.png">
+                  <div>List</div>
+                  <img class="arrow" src="../../../assets/icons/rightarrow-icon.png">
+                  <div class="dropdown child-dropdown">
+                    <div>Dude</div>
+                    <div>Main</div>
+                    <div>Dude</div>
+                    <div>Main</div>
+                    <div>Dude</div>
+                    <div>Main</div>
+                    <div>Dude</div>
+                    <div>Main</div>
+                  </div>
+                </div>
+                <div class="add-to add-to-tag">
+                  <img class="dropdown-img" src="../../../assets/icons/tag-icon.png">
+                  <div>Tag</div>
+                  <img class="arrow" src="../../../assets/icons/rightarrow-icon.png">
+                  <div class="dropdown child-dropdown">
+                    <div>Dude</div>
+                    <div>Main</div>
+                    <div>Dude</div>
+
+                    <div>Main</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div id="tasks-wrapper">
+      @for (task of ToDoList?.tasks; track $index)
+      {
+
+      <div class="task">
+
+        <div class="actions">
+          <div class="actions-btns">
+            <div>
+              <img src="../../../assets/icons/delete-icon.png" (click)="deleteTask(task.id)" alt="">
+            </div>
+            <div>
+              <img src="../../../assets/icons/timer-icon.png" alt="">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        @if (task.startTime != null)
+        {
+        <div class="task-time">{{timeFormatConverter(task.startTime)}}</div>
+        }
+        @else {
+        <div class="task-time">Today</div>
+        }
+
+
+        <div class="task-title" (click)="displayTaskDetails(task)">{{task.title}}</div>
+
+        <div class="checkbox-wrapper">
+          <label class="checkbox">
+            <input class="checkbox__trigger visuallyhidden" type="checkbox" [(ngModel)]="task.completed"
+              (click)="checkTaskCompleted(task)" />
+            <span class="checkbox__symbol">
+              <svg aria-hidden="true" class="icon-checkbox" width="28px" height="28px" viewBox="0 0 28 28" version="1"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 14l8 7L24 7"></path>
+              </svg>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
+  <div id="task-detail-section">
+    @if (selectedTask)
+    {
+    <app-task-detail [task]="selectedTask" (eventEmitter)="handleEvent($event)"></app-task-detail>
+    }
+
+  </div>
+</div>

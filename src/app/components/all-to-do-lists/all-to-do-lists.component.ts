@@ -36,18 +36,13 @@ export class AllToDoListsComponent {
           next : (res) => 
           {
             this.toDoLists = res;
-            console.log(res);
+          
           },
-          error : (err) => console.log(err)
+          error : (err) => console.log()
         }
       )
    }
 
-
-   move()
-   {
-
-   }
 
    
 }

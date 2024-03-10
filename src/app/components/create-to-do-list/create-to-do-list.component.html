@@ -1,16 +1,35 @@
 <h1>Create a To-Do List</h1>
 
-<form [formGroup]="ToDoListForm">
+<div>
 
-    <label for ="name">To-Do List Title : </label>
-    <input id="name" type="text" formControlName="title">
+    <label for ="todo-title">To-Do List Title : </label>
+    <input id="todo-title" type="text" [(ngModel)] = "newToDoList.title" >
     <br>
-    <label for ="name">To-Do List Title : </label>
-    <input id="name" type="text" formControlName="title">
-    <br>
-    <label for ="name">Add a Task: </label>
-     <button>+</button>
-     
+
+    <!--
+    <label for ="task">Add a Task: </label>
+     <button (click)="clickAddTask()">+</button>
+<br>
+     @for (task of tasks; track $index) 
+     {
+        <label for ="task-title">Task Title : </label>
+        <input id="task-title" class="task-title" type="text" [(ngModel)] = "task.title">
+        <br>
+        <label for ="task-description">Task Description : </label>
+        <input id="task-description" class="task-description" type="text" [(ngModel)] = "task.description">
+        <br>
+        <label for ="task-title">Task StartTime : </label>
+        <input id="task-title" class="task-title" type="date" [(ngModel)] = "task.startTime">
+        <br>
+        <label for ="task-description">Task EndTime : </label>
+        <input id="task-description" class="task-description" type="date" [(ngModel)] = "task.endTime">
+        <br>
+        <label for ="task-description">Task Tag : </label>
+        <input id="task-description" class="task-description" type="text" [(ngModel)] = "task.tag">
+        <br>
+     }
+     -->
     <br>
     
-</form>
+    <button type="submit" (click)="onSubmit()" >Create</button>
+    </div>

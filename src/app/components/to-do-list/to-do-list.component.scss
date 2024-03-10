@@ -1,0 +1,292 @@
+@import "../../styles/checkbox-styles.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/checkbox-styles.scss";
+@import '../../styles/button-styles.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+#wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+#wrapper {
+    height: 100vh !important;
+    background-color: $background-color;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+#tasks-section {
+
+    width: 66%;
+
+}
+
+h1 {
+    color: $primary-color;
+    font-size: 40px;
+    padding-left: 2.5%;
+    padding-top: 1%;
+
+}
+
+div {
+    color: $primary-color;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.task-title {
+    cursor: pointer;
+    width: fit-content;
+}
+
+#task-input {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid $primary-color;
+    margin-top: 2.5%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+        width: 30px;
+        cursor: pointer;
+        filter: $primary-color-filter;
+        transition: 0.3s;
+        height: fit-content;
+    }
+
+    #options {
+        margin-right: 10px;
+    }
+}
+
+#title-input {
+
+    width: 90%;
+    padding: 15px 15px 13px 23px;
+
+    @include button-styles($background-color, transparent);
+
+    &::placeholder {
+        color: $primary-color;
+        font-size: 15px;
+        font-family: inherit;
+    }
+}
+
+#tasks-wrapper {
+
+    margin-top: 30px;
+}
+
+.time-picker {
+    display: flex;
+    align-items: center;
+    padding: 3px 5px 3px 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    width : max-content;
+    img {
+        width: 16px !important;
+        margin-right: 5px;
+    }
+
+    div {
+        font-size: 12px !important;
+        font-weight: normal;
+     
+    }
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.task {
+    width: 35%;
+    margin: 0 auto;
+    position: relative;
+    padding: 30px 60px 30px 60px;
+    margin-bottom: 16px;
+    background-color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    overflow: hidden;
+    box-shadow: $box-shadow;
+
+    &:has(.actions-hover-trigger:hover) {
+        .actions {
+            left: 0%;
+        }
+    }
+
+    img {
+        width: 25px;
+        cursor: pointer;
+        filter: $light-green-filter;
+        transition: 0.3s;
+    }
+}
+
+.checkbox-wrapper {
+    position: absolute;
+    top: 8%;
+    right: 2%;
+}
+
+.actions-hover-trigger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    background-color: $primary-color;
+    height: 100%;
+}
+
+.actions {
+    position: absolute;
+    left: -0%;
+
+    .actions-btns {
+        div {
+            color: white;
+        }
+
+        width: fit-content;
+        margin: 0 auto;
+        position: absolute;
+        left: -225%;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        transition: .3s;
+    }
+
+    &:hover {
+        width: 10%;
+
+        .actions-btns {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    top: 50%;
+    width: 10px;
+    transform: translateY(-50%);
+    height: 100%;
+    background-color: $primary-color;
+    transition: .3s;
+}
+
+
+.options {
+    position: relative;
+}
+
+.dropdown {
+    padding: 15px 10px 10px 15px;
+    border: 1px solid transparent;
+    position: absolute;
+    display: none;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 10;
+
+    .section {
+        margin-bottom: 8px;
+    }
+
+    div {
+        color: $grey;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .section-name {
+        margin-bottom: 8px;
+    }
+
+    }
+
+    .add-to-section {
+        .add-to {
+            display: flex;
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5px 0px 5px 8px;
+            border-radius: 5px;
+
+            &:hover .child-dropdown {
+
+
+                display: block !important;
+
+            }
+
+            div {
+                font-size: 13px;
+            }
+
+            &:hover {
+                background-color: $secondary-color;
+            }
+
+            .arrow {
+                margin-left: 58%;
+            }
+
+            img {
+                width: 1px;
+                display: block;
+                margin-right: 6px;
+                margin-bottom: 2px;
+            }
+        }
+    }
+
+
+.child-dropdown {
+    top: 0%;
+    right: -31%;
+}
+
+.dropdown-img {
+    width: 22px !important;
+}
+
+
+
+#task-detail-section {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 31%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.task-time
+{
+    font-size: 15px !important;
+    font-weight: normal;
+    margin-bottom: 8px;
+
+}

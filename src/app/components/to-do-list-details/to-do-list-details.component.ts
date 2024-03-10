@@ -1,26 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { ToDoList } from '../../interfaces/to-do-list';
-import { WeekDay } from '@angular/common';
+import { Task } from '../../interfaces/task';
+import { TaskService } from '../../services/task.service';
 @Component({
   selector: 'app-to-do-list',
   standalone: true,
-  imports: 
-  [
-    
-  ],
+  imports:
+    [
+
+    ],
   templateUrl: './to-do-list-details.component.html',
   styleUrl: './to-do-list-details.component.scss'
 })
-export class ToDoListDetailsComponent
-{
+export class ToDoListDetailsComponent {
 
- @Input() toDoList !: ToDoList;
- public WeekDay= WeekDay;
-constructor()
-{
+  @Input() toDoList !: ToDoList;
+  tasks: Task[] = [];
+  constructor(private taskService: TaskService) {
 
-}
+  }
 
+  ngOnInit() {
+
+    this.tasks = this.toDoList.tasks;
+  }
 
 
 }

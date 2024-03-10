@@ -1,0 +1,31 @@
+<div class="priorities-btns">
+<div   class="btn tooltip"  [ngStyle]="{'background-color':task.priority === priorities[0]  ?  selectedColor :'transparent' }" >
+    <img  (click)="setPriority(priorities[0])" id="none-prior"
+      src="../../../assets/icons/priority-icon.png">
+      <span class="tooltiptext">None</span>
+    
+  </div>
+  <div    class="btn tooltip"   [ngStyle]="{'background-color':task.priority === priorities[1]  ? selectedColor :'transparent'}">
+    <img (click)="setPriority(priorities[1])" id="low-prior"
+      src="../../../assets/icons/priority-icon.png">
+      <span class="tooltiptext">Low</span>
+  </div>
+  <div    class="btn tooltip"  [ngStyle]="{'background-color':task.priority === priorities[2]  ? selectedColor :'transparent' }">
+    <img (click)="setPriority(priorities[2])" id="medium-prior"
+      src="../../../assets/icons/priority-icon.png">
+      <span class="tooltiptext">Medium</span>
+    
+  </div>
+  <div  class="btn tooltip"  [ngStyle]="{'background-color':task.priority === priorities[3]  ? selectedColor :'transparent' }">
+    <img (click)="setPriority(priorities[3])"  id="high-prior"
+      src="../../../assets/icons/priority-icon.png">
+      <span class="tooltiptext">High</span>
+    
+  </div>
+  <div   class="btn tooltip"  [ngStyle]="{'background-color':task.priority === priorities[4]  ? selectedColor :'transparent' }">
+    <img (click)="setPriority(priorities[4])"  id="urgent-prior"
+      src="../../../assets/icons/priority-icon.png">
+      <span class="tooltiptext">Urgent</span>
+    
+
+</div>

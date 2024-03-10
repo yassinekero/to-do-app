@@ -9,17 +9,26 @@ import { HttpClient } from '@angular/common/http';
 export class ToDoListService {
 
 
-  private  url = "http://localhost:3000/to-do-lists";
+  private  baseUrl = "http://localhost:3000/to-do-lists";
   constructor(private http : HttpClient) { }
 
 
   getAllTodoLists() : Observable<ToDoList[]>
   {
-    return this.http.get<ToDoList[]>(this.url);
+    return this.http.get<ToDoList[]>(this.baseUrl);
   }
 
   getToDoList(id : number) : Observable<ToDoList | undefined> 
   {
-    return this.http.get<ToDoList>(`${this.url}/${id}`);
+    return this.http.get<ToDoList>(`${this.baseUrl}/${id}`);
   }
+   createToDoList(toDoList : ToDoList) : Observable<ToDoList>
+   {
+   return this.http.post<ToDoList>(this.baseUrl, toDoList);
+   }
+   updateToDOList(toDoList : ToDoList | undefined) : Observable<ToDoList>
+   {
+    return this.http.put<ToDoList>(`${this.baseUrl}/${toDoList?.id}`,toDoList)
+   }
+ 
 }

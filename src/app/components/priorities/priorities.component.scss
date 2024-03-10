@@ -1,0 +1,71 @@
+@import "../../styles/colors.scss";
+
+.priorities-btns {
+    display: flex;
+    margin-bottom: 5px;
+
+    .btn {
+        margin-right: 4px;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 2px 2px 2px 2px;
+
+
+        img {
+            width: 30px;
+            display: block;
+            margin: 0 auto;
+
+        }
+    }
+
+    #none-prior {
+        filter: $grey-filter;
+    }
+
+    #low-prior {
+        filter: $green-filter;
+    }
+
+    #medium-prior {
+        filter: $yellow-filter;
+    }
+
+    #high-prior {
+        filter: $orange-filter;
+    }
+
+    #urgent-prior {
+        filter: $red-filter;
+    }
+}
+
+.selected {
+    background-color: $secondary-color;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+
+}
+
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

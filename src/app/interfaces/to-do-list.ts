@@ -1,10 +1,10 @@
-import { WeekDay } from "@angular/common";
-import { Task } from "./task";
+import { Task } from "../interfaces/task";
+
 
 export interface ToDoList {
     id?: number,
-    title: string,
-    tasks: Task[],
-    days: number[],
+    title: string ,
+    tasks: Task[] ,
+    days: number[] ,
 }
 

@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="container">
+        <h1>Task: </h1>
+        <div class="first-field">
+            <input type="text" class="text-input task-title" placeholder="Task Title" [(ngModel)]="task.title"
+                required="">
+        </div>
+        <div class="first-field">
+            <textarea rows="6" class="text-input task-title" placeholder="Description"
+                [(ngModel)]="task.description"></textarea>
+        </div>
+        <div class="grid-wrapper">
+            <div class="field">
+                <label>Priority</label>
+            </div>
+            <div class="field">
+                <div class="value-fields">
+                    <app-priorities [task]="task" [selectedColor]="selectedColor"></app-priorities>
+                </div>
+            </div>
+            <div class="field"> <label>List</label>
+            </div>
+            <div class="field">
+                <div class="value-fields">
+                    <select>
+
+                        @for (todolist of allToDoLists; track $index)
+                        {
+                        <option>{{todolist.title}}</option>
+                        }
+
+
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="buttons">
+            <button (click)="deleteTask()">Delete Task</button>
+            <button (click)="submit()">Save Changes</button>
+        </div>
+    </div>

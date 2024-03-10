@@ -2,9 +2,9 @@
     <div class="card-title">{{ toDoList.title }}</div>
     <div class="card-content">
       <ul>
-        @for ( task of toDoList.tasks; track $index) 
+        @for ( task of tasks; track $index) 
         {
-          <li>{{ task.title }}</li>
+          <li>{{task.title}}</li>
         }
         
       </ul>

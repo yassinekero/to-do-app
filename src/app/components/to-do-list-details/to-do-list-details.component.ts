@@ -16,12 +16,14 @@ export class ToDoListDetailsComponent {
 
   @Input() toDoList !: ToDoList;
   tasks: Task[] = [];
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService) 
+  {
 
   }
 
   ngOnInit() {
-
+  
+   
     this.tasks = this.toDoList.tasks;
   }
 

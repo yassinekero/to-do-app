@@ -1,14 +1,14 @@
 <div class="wrapper">
     <div class="start-time time">
-        <div>Start</div>
+        <div>Start Date</div>
         <input class="picker" [min]="today"  [(ngModel)]="task.startDate"  type="date" name="startDate"/>
-        <input class="picker time-picker" [(ngModel)]="task.startTime" type="time">
+       
     </div>
 
     <div class="end-time time">
-        <div style="margin-right: 17px;">End</div>
-        <input class="picker" [min]="task.startDate" [(ngModel)]="task.endDate" type="date" name="startDate">
+        <div style="margin-right: 17px;">Time</div>
+        <input class="picker time-picker" [(ngModel)]="task.startTime" type="time">
         <input class="picker time-picker"  [min]="task.startTime"  [(ngModel)]="task.endTime" type="time">
     </div>
     
-    </div>
+</div>

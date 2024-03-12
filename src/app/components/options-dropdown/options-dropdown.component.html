@@ -1,1 +1,48 @@
-<p>options-dropdown works!</p>
+<div>
+    <div class="section priority-section">
+        <div class="section-name">Priority</div>
+        <app-priorities [task]="task" [selectedColor]="selectedColor"></app-priorities>
+    </div>
+
+    <div class="section add-to-section">
+        <div class="section-name">Add to</div>
+        <div class="add-to add-to-list">
+            <div class="flex-wrapper">
+                <div class="box">
+                    <img  class="dropdown-img" src="../../../assets/icons/list-icon.png">
+                    <div  >List</div>
+                </div>
+                <img style="padding-left: 5px;" class="box arrow" src="../../../assets/icons/rightarrow-icon.png">
+            </div>
+            <div class="dropdown child-dropdown">
+                <div class="add-to add-to-list-child" [ngStyle]="{'background-color': task.toDoListId == 0  ? selectedColor :'transparent'}"  (click)="setList(0)">
+                    <img class="dropdown-img" src="../../../assets/icons/list-icon-2.png">
+                    <div>
+                       None
+                    </div>
+                </div>
+                @for (todolist of allToDoLists; track $index)
+                {
+                    <div  (click)="setList(todolist.id)"  [ngStyle]="{'background-color': task.toDoListId == todolist.id  ? selectedColor :'transparent'}"  class="add-to add-to-list-child">
+                        <img class="dropdown-img" src="../../../assets/icons/list-icon-2.png">
+                        <div>
+                            {{todolist.title}}
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="add-to add-to-tag">
+            <div  class="flex-wrapper">
+                <div class="box">
+                    <img class="dropdown-img" src="../../../assets/icons/tag-icon.png">
+                    <div>Tag</div>
+                </div>
+                <img   class="box arrow" src="../../../assets/icons/rightarrow-icon.png">
+            </div>
+            <div class="dropdown child-dropdown">
+
+            </div>
+        </div>
+    </div>
+</div>

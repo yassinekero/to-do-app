@@ -223,57 +223,6 @@ div {
 
     }
 
-    .add-to-section {
-        .add-to {
-            display: flex;
-            position: relative;
-            width: 100%;
-            cursor: pointer;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 5px 0px 5px 8px;
-            border-radius: 5px;
-
-            &:hover .child-dropdown {
-
-
-                display: block !important;
-
-            }
-
-            div {
-                font-size: 13px;
-            }
-
-            &:hover {
-                background-color: $secondary-color;
-            }
-
-            .arrow {
-                margin-left: 58%;
-            }
-
-            img {
-                width: 1px;
-                display: block;
-                margin-right: 6px;
-                margin-bottom: 2px;
-            }
-        }
-    }
-
-
-.child-dropdown {
-    top: 0%;
-    right: -31%;
-}
-
-.dropdown-img {
-    width: 22px !important;
-}
-
-
-
 #task-detail-section {
     position: fixed;
     top: 0;

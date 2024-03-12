@@ -18,7 +18,7 @@ export class ToDoListService {
     return this.http.get<ToDoList[]>(this.baseUrl);
   }
 
-  getToDoList(id : number) : Observable<ToDoList | undefined> 
+  getToDoList(id : string) : Observable<ToDoList | undefined> 
   {
     return this.http.get<ToDoList>(`${this.baseUrl}/${id}`);
   }
@@ -30,5 +30,5 @@ export class ToDoListService {
    {
     return this.http.put<ToDoList>(`${this.baseUrl}/${toDoList?.id}`,toDoList)
    }
- 
+
 }

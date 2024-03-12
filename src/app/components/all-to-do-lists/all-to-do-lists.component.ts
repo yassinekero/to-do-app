@@ -28,6 +28,7 @@ export class AllToDoListsComponent {
   ngOnInit() : void 
   {
     this.getAllToDoLists();
+    
   }
    getAllToDoLists() : void
    {

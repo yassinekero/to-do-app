@@ -12,6 +12,8 @@ const db = new sqlite3.Database('to_do.db');
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+
+
 // GET all to-do lists
 app.get('/to-do-lists', (req, res) => {
     db.all('SELECT * FROM to_do_lists', (err, toDoLists) => {
@@ -43,7 +45,28 @@ app.get('/to-do-lists', (req, res) => {
         }
     });
 });
-
+app.get('/to-do-lists/today', (req, res) => {
+    const id = 3;
+    db.get('SELECT * FROM to_do_lists WHERE id = ?', [id], (err, toDoList) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else if (!toDoList) {
+            res.status(404).json({ error: 'To-do list not found' });
+        } else {
+            const today = new Date().toISOString().slice(0, 10);
+            db.all('SELECT * FROM tasks WHERE startDate = ?', [today], (err, tasks) => {
+                if (err) {
+                    console.error(err.message);
+                    res.status(500).json({ error: 'Internal Server Error' });
+                } else {
+                    toDoList.tasks = tasks;
+                    res.json(toDoList);
+                }
+            });
+        }
+    });
+});
 // GET a single to-do list by ID
 app.get('/to-do-lists/:id', (req, res) => {
     const id = req.params.id;
@@ -111,6 +134,19 @@ app.delete('/to-do-lists/:id', (req, res) => {
     });
 });
 
+app.get('/tasks/today', (req, res) => {
+    const today = new Date().toISOString().slice(0, 10); // Get today's date in "YYYY-MM-DD" format
+    db.all('SELECT * FROM tasks WHERE startDate = ?', [today], (err, tasks) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } 
+        else {
+            res.json(tasks);
+        }
+    });
+});
+
 // GET all tasks
 app.get('/tasks', (req, res) => {
     db.all('SELECT * FROM tasks', (err, rows) => {
@@ -122,6 +158,7 @@ app.get('/tasks', (req, res) => {
         }
     });
 });
+
 // GET a single task by ID
 app.get('/tasks/:id', (req, res) => {
     const id = req.params.id;
@@ -137,9 +174,8 @@ app.get('/tasks/:id', (req, res) => {
     });
 });
 
-// POST a new task
+// GET tasks with startDate equal to today's date
 
-// POST a new task
 // POST a new task
 app.post('/tasks', (req, res) => {
     const { title, description, startDate, endDate, startTime, endTime, toDoListId, completed, tag, priority } = req.body;

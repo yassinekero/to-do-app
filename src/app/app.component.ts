@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule, WeekDay } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterModule,Router  } from '@angular/router';
 import { ToDoList } from './interfaces/to-do-list';
 import { ToDoListService } from './services/to-do-list.service';
 import { MenuComponent } from './components/menu/menu.component';
@@ -12,6 +12,7 @@ import { TaskDetailComponent } from './components/task-detail/task-detail.compon
   [
     CommonModule,
      RouterOutlet,
+     RouterModule,
     MenuComponent,
     TaskDetailComponent
   ],
@@ -22,13 +23,15 @@ export class AppComponent {
 
 
   public toDoLists !:  ToDoList[];
-  constructor(private ToDoListService : ToDoListService)
+  constructor(private ToDoListService : ToDoListService, private router : Router)
   {
   
   }
   ngOnInit() : void 
   {
     this.getAllToDoLists();
+
+
   }
    getAllToDoLists() : void
    {
@@ -42,5 +45,10 @@ export class AppComponent {
           error : (err) => console.log(err)
         }
       )
+   }
+   openToday()
+   {
+    console.log("de")
+    this.router.navigate(["to-do", 3])
    }
 }

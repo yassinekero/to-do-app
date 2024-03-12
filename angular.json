@@ -20,6 +20,7 @@
             "outputPath": "dist/to-do-list",
             "index": "src/index.html",
             "browser": "src/main.ts",
+         
             "polyfills": [
               "zone.js"
             ],

@@ -1,0 +1,102 @@
+@import "../../styles/colors.scss";
+
+.section {
+    margin-bottom: 8px;
+}
+
+div {
+    color: $grey;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.section-name {
+    margin-bottom: 8px;
+}
+
+.add-to-section {
+    .add-to {
+        display: flex;
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px 0px 5px 8px;
+        border-radius: 5px;
+
+        &:hover .child-dropdown {
+            display: block !important;
+
+        }
+
+        div {
+            font-size: 13px;
+        }
+
+        &:hover {
+            background-color: $secondary-color;
+        }
+
+        .arrow {
+            width: 30px;
+            margin-left: 58%;
+        }
+
+        img {
+            width: 1px;
+            display: block;
+            margin-right: 6px;
+            margin-bottom: 2px;
+            filter: $primary-color-filter;
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+        }
+
+        .flex-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100% !important;
+        }
+    }
+}
+
+.options {
+    position: relative;
+}
+
+.dropdown-img {
+    width: 22px !important;
+}
+
+.child-dropdown {
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    padding: 15px 10px 10px 15px;
+    border: 1px solid transparent;
+    position: absolute;
+    margin-bottom: 5px;
+    display: none;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 10;
+    width: max-content;
+
+    img {
+        width: 18px !important;
+        display: block;
+    }
+}
+
+.add-to-list-child {
+   
+    &:hover
+    {
+        background-color: none !important;
+    }
+}

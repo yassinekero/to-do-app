@@ -22,13 +22,12 @@
             </div>
             <div class="field">
                 <div class="value-fields">
-                    <select>
-
+                    <select  [(ngModel)]="task.toDoListId">
+                        <option value="0" >None</option>
                         @for (todolist of allToDoLists; track $index)
                         {
-                        <option>{{todolist.title}}</option>
+                        <option value="{{todolist.id}}" >{{todolist.title}}</option>>
                         }
-
 
                     </select>
                 </div>

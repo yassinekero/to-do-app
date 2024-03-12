@@ -17,18 +17,10 @@ export class PrioritiesComponent {
   @Input() task : Task;
   @Input() selectedColor : string
   priorities = ["None", "Low", "Medium", "High", "Urgent"]
-  selected = {
-    'background-color' :  "#ddf5f0"
-  };
-
 
   constructor()
   {
-    if (this.selectedColor) {
-      this.selected = {
-        'background-color' :  this.selectedColor
-      };
-    }
+    
   }
  
   setPriority(priority: string) {

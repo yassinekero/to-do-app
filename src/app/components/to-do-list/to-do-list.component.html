@@ -11,7 +11,7 @@
           <div class="options" id="time-options">
             <div class="time-picker" (click)="displayTimePicker()">
               <img src="../../../assets/icons/calendar-icon.png">
-              <div>{{newTask.startDate | customDate  }}</div>
+              <div>{{newTask.startDate | customDate }}</div>
             </div>
             <div class="dropdown" [style.display]="displayTimePickerStyle">
               @if(displayTimePickerStyle == "block")
@@ -24,53 +24,20 @@
           <div class="options" id="task-options">
             <img (click)="displayDropDown()" src="../../../assets/icons/dropdown-icon.png">
             <div class="dropdown" [style.display]="displayStyle">
-              <div class="section priority-section">
-                <div class="section-name">Priority</div>
-
-                <app-priorities [task]="newTask" [selectedColor]="selectedColor"></app-priorities>
-
-              </div>
-
-              <div class="section add-to-section">
-                <div class="section-name">Add to</div>
-                <div class="add-to add-to-list">
-                  <img class="dropdown-img" src="../../../assets/icons/list-icon.png">
-                  <div>List</div>
-                  <img class="arrow" src="../../../assets/icons/rightarrow-icon.png">
-                  <div class="dropdown child-dropdown">
-                    <div>Dude</div>
-                    <div>Main</div>
-                    <div>Dude</div>
-                    <div>Main</div>
-                    <div>Dude</div>
-                    <div>Main</div>
-                    <div>Dude</div>
-                    <div>Main</div>
-                  </div>
-                </div>
-                <div class="add-to add-to-tag">
-                  <img class="dropdown-img" src="../../../assets/icons/tag-icon.png">
-                  <div>Tag</div>
-                  <img class="arrow" src="../../../assets/icons/rightarrow-icon.png">
-                  <div class="dropdown child-dropdown">
-                    <div>Dude</div>
-                    <div>Main</div>
-                    <div>Dude</div>
-
-                    <div>Main</div>
-                  </div>
-                </div>
-              </div>
+              @if(displayStyle == "block")
+              {
+              <app-options-dropdown [task]="newTask" [allToDoLists]="allToDoLists"></app-options-dropdown>
+              }
+             
             </div>
 
           </div>
         </div>
 
-
       </div>
     </div>
     <div id="tasks-wrapper">
-      @for (task of ToDoList?.tasks; track $index)
+      @for (task of ToDoList.tasks; track $index)
       {
 
       <div class="task">
@@ -81,7 +48,7 @@
               <img src="../../../assets/icons/delete-icon.png" (click)="deleteTask(task.id)" alt="">
             </div>
             <div>
-              <img src="../../../assets/icons/timer-icon.png" alt="">
+              <img src="../../../assets/icons/focus-icon.png" alt="">
             </div>
 
           </div>
@@ -91,7 +58,7 @@
 
         @if (task.startTime != null)
         {
-        <div class="task-time">{{timeFormatConverter(task.startTime)}}</div>
+        <div class="task-time">{{task.startTime | timeFormatConverter}}</div>
         }
         @else {
         <div class="task-time">Today</div>
@@ -118,10 +85,14 @@
     </div>
   </div>
   <div id="task-detail-section">
+
     @if (selectedTask)
     {
-    <app-task-detail [task]="selectedTask" (eventEmitter)="handleEvent($event)"></app-task-detail>
+    <app-task-detail [allToDoLists]="allToDoLists" [task]="selectedTask"
+      (eventEmitter)="handleEvent($event)"></app-task-detail>
     }
+
+
 
   </div>
 </div>

@@ -16,9 +16,9 @@ import { PrioritiesComponent } from '../priorities/priorities.component';
 })
 export class TaskDetailComponent 
 {
+     @Input()  allToDoLists : ToDoList[]
      @Input() task : Task;
      @Output() eventEmitter = new EventEmitter<any>();
-     allToDoLists : ToDoList[]
      selectedColor = "#F7FFFE";
   emitEvent(task: Task, eventType: string): void {
     this.eventEmitter.emit({ task, eventType });
@@ -26,13 +26,14 @@ export class TaskDetailComponent
   
      constructor(private ToDoListService : ToDoListService)
      {
-      ToDoListService.getAllTodoLists().subscribe(
-      {
-        next : res => this.allToDoLists = res,
-        error : err => console.log(err)
-      })
+      
      }
 
+     ngOnInit()
+     {
+      console.log(this.task)
+      console.log(this.allToDoLists)
+     }
 
      submit()
      {

@@ -91,13 +91,23 @@ select
 {
     outline: none;
     background-color: $background-color-2;
-    border: 3px solid $primary-color;
-    border-radius: 8px;
+    border: 2px solid $primary-color;
+    border-radius: 5px;
     padding: 10px 15px 10px 15px;
-    option 
-    {
-        text-align: center;
-    }
+    font-family: "century-gothic", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+   option 
+   {
+    font-family: inherit;
+    text-align: center;
+    margin: 40px;
+    background: $secondary-color;
+    color: black;
+    
+   } 
+
 }
 .buttons 
 {
@@ -125,3 +135,6 @@ select
    
   }
 }
+
+
+

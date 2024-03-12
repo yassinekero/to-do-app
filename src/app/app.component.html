@@ -1,6 +1,53 @@
 <div id="wrapper">
     <div class="box">
-        <app-menu></app-menu>
+        <div id="menu-wrapper">
+            <div id="wrapper">
+            
+                    <div id="tabs-wrapper">
+
+
+                        <a routerLink="to-do/today">
+                        <div  class="tab-wrapper">
+                          
+                            <img class="tab-icon" src="../assets/icons/tasks-icon.png">
+                            
+                            <div class="tab-title">Today</div>
+                    
+                        </div>
+                    </a>
+                        <div class="tab-wrapper">
+                          
+                            <img class="tab-icon" src="../assets/icons/calendar-icon.png">
+                            
+                            <div class="tab-title">Calendar</div>
+                        </div>
+                        <a routerLink="to-do/lists">
+                            <div class="tab-wrapper">
+                              
+                                <img class="tab-icon" src="../assets/icons/list-icon-3.png">
+                                
+                                <div class="tab-title">Lists</div>
+                            </div>
+                            </a>
+                        <div class="tab-wrapper">
+                          
+                            <img class="tab-icon" src="../assets/icons/project-icon.png">
+                            
+                            <div class="tab-title">Projects</div>
+                        </div>
+                        <a routerLink="to-do/lists">
+                            <div class="tab-wrapper">
+                              
+                                <img class="tab-icon" src="../assets/icons/focus-icon.png">
+                                
+                                <div class="tab-title">Focus</div>
+                            </div>
+                            </a>
+                    </div>
+                </div>
+                       
+        
+        </div>
     </div>
     <div class="box" id="outlet">
         <router-outlet></router-outlet>

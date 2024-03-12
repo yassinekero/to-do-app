@@ -6,6 +6,11 @@ import { CreateToDoListComponent } from './components/create-to-do-list/create-t
 export const routes: Routes = 
 [
   {
+    path: "to-do/lists",
+    component : AllToDoListsComponent,
+    title : "Create To-Do List"
+  },
+  {
     path: "to-do/create",
     component : CreateToDoListComponent,
     title : "Create To-Do List"
@@ -16,11 +21,10 @@ export const routes: Routes =
     title : "To-Do List"
   },
  
-
   {
     path: "",
-    component : AllToDoListsComponent,
-    title : "All To-Do Lists"
+    component : ToDoListComponent,
+    title : "Today List"
   }, 
 
   {

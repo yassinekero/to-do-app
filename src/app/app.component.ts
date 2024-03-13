@@ -1,21 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule,Router  } from '@angular/router';
+import { Router  } from '@angular/router';
 import { ToDoList } from './interfaces/to-do-list';
 import { ToDoListService } from './services/to-do-list.service';
-import { MenuComponent } from './components/menu/menu.component';
-import { TaskDetailComponent } from './components/task-detail/task-detail.component';
+
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: 
-  [
-    CommonModule,
-     RouterOutlet,
-     RouterModule,
-    MenuComponent,
-    TaskDetailComponent
-  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -130,7 +130,7 @@ select
      &:last-child
      {
         @include button-styles($primary-color, transparent);
-        color: $secondary-color
+        color: white
      }
    
   }

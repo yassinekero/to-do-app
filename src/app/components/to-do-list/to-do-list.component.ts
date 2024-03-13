@@ -10,8 +10,8 @@ import { DatePipe, NgClass } from '@angular/common';
 import { TaskTimeComponent } from '../task-time/task-time.component';
 import { taskIntializer } from '../../utils/tasks-utils';
 import { PrioritiesComponent } from '../priorities/priorities.component';
-import { CustomDatePipe } from '../../../pipes/custom-date.pipe';
-import { TimeFormatConverterPipe } from '../../../pipes/time-format-converter.pipe';
+import { CustomDatePipe } from '../../pipes/custom-date.pipe';
+import { TimeFormatConverterPipe } from '../../pipes/time-format-converter.pipe';
 import { DataService } from '../../services/data.service';
 import { OptionsDropdownComponent } from '../options-dropdown/options-dropdown.component';
 

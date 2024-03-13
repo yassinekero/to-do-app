@@ -1,0 +1,52 @@
+@import "../../styles/colors.scss";
+.wrapper 
+{
+    height: 100vh;
+}
+.top-bar 
+{
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.current-view-date 
+{
+    font-size: 35px;
+}
+.cal-date-nav-button
+{
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    display: flex;
+     margin-right: 20px;
+}
+button
+{
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    display: block;
+    padding: 8px 5px 8px 5px;
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+    font-size: 15px;
+    width: 100px;
+    font-family: "century-gothic", sans-serif;
+    font-weight: bold;
+}
+#today 
+{
+    border-left: 1px solid $primary-color !important;
+    border-right: 1px solid $primary-color !important;
+    
+}
+#previous , #next
+{
+   border-right: 0px;
+   background-color: #18666d;
+   color: white;
+}

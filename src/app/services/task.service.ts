@@ -33,5 +33,8 @@ export class TaskService {
   {
    return this.http.get<Task[]>(`${this.baseUrl}/today`);
   }
-  
+  getAllTasks() : Observable<Task[]>
+  {
+  return this.http.get<Task[]>(`${this.baseUrl}`);
+  }
 }

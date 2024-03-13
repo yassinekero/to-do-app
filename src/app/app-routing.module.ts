@@ -1,10 +1,17 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { AllToDoListsComponent } from './components/all-to-do-lists/all-to-do-lists.component';
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { CreateToDoListComponent } from './components/create-to-do-list/create-to-do-list.component';
+import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 
-export const routes: Routes = 
+
+const routes: Routes = 
 [
+{
+  path : "calendar-view",
+  component : CalendarViewComponent
+},
   {
     path: "to-do/lists",
     component : AllToDoListsComponent,
@@ -33,3 +40,9 @@ export const routes: Routes =
   pathMatch : 'full'
   }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

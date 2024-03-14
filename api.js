@@ -134,14 +134,26 @@ app.delete('/to-do-lists/:id', (req, res) => {
     });
 });
 
-app.get('/tasks/today', (req, res) => {
-    const today = new Date().toISOString().slice(0, 10); // Get today's date in "YYYY-MM-DD" format
-    db.all('SELECT * FROM tasks WHERE startDate = ?', [today], (err, tasks) => {
+
+//A method to verify that date format 
+function isValidDateFormat(dateString) {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(dateString);
+}
+
+
+app.get('/tasks/date/:date', (req, res) => {
+    const requestedDate = req.params.date;
+
+    if (!isValidDateFormat(requestedDate)) {
+        res.status(400).json({ error: 'Invalid date format.' });
+        return;
+    }
+    db.all('SELECT * FROM tasks WHERE startDate = ?', [requestedDate], (err, tasks) => {
         if (err) {
             console.error(err.message);
             res.status(500).json({ error: 'Internal Server Error' });
-        } 
-        else {
+        } else {
             res.json(tasks);
         }
     });

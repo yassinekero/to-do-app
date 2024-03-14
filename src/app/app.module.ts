@@ -7,11 +7,12 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule,Router  } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
       useFactory : adapterFactory
     })
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, CustomDatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

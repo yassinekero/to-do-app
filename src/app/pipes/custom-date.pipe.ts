@@ -8,11 +8,15 @@ export class CustomDatePipe implements PipeTransform {
 
 
   constructor(private datePipe : DatePipe) {}
-  transform(value: string | undefined):  string | null{
+  transform(value: string | undefined):  string {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    if(value === this.datePipe.transform(today, "yyyy-MM-dd"))
+    if(!value)
+    {
+      return "Unset"
+    }
+    else if(value === this.datePipe.transform(today, "yyyy-MM-dd"))
     {
       return 'Today'
     }
@@ -20,9 +24,10 @@ export class CustomDatePipe implements PipeTransform {
     {
       return 'Tomorrow';
     }
+   
     else 
     {
-      return this.datePipe.transform(value,"MMMM dd");
+      return (String) (this.datePipe.transform(value,"MMMM dd"));
     }
 
   }

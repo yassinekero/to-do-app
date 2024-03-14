@@ -28,7 +28,7 @@
               {
               <app-options-dropdown [task]="newTask" [allToDoLists]="allToDoLists"></app-options-dropdown>
               }
-             
+
             </div>
 
           </div>
@@ -37,10 +37,9 @@
       </div>
     </div>
     <div id="tasks-wrapper">
-      @for (task of ToDoList.tasks; track $index)
-      {
+  
 
-      <div class="task">
+      <div *ngFor="let task of ToDoList.tasks" class="task" @taskAnim>
 
         <div class="actions">
           <div class="actions-btns">
@@ -81,7 +80,7 @@
         </div>
       </div>
 
-      }
+      
     </div>
   </div>
   <div id="task-detail-section">

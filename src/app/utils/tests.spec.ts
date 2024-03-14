@@ -1,11 +1,19 @@
-import { timeFormatConverter } from './utils';
+import { isValidDate } from "./utils";
 
 
-describe('timeFormatConverter', () =>
+
+
+
+describe("isValidDate", ()=> 
 {
-    it("it should convert to AM/PM format", ()=> 
+    it("it must return true ", ()=> 
     {
-    const result = timeFormatConverter("14:10");
-    expect(result).toBe("02:10 PM")
+        const result = isValidDate("2024-03-13");
+        expect(result).toBe(true)
+    }),
+    it("it must return false", ()=> 
+    {
+        const result = isValidDate("34");
+        expect(result).toBe(false)
     })
 })

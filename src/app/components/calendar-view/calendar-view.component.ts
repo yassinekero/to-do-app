@@ -3,6 +3,8 @@ import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { TasksToCalendarEvents } from '../../utils/utils';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar-view',
@@ -16,15 +18,18 @@ export class CalendarViewComponent {
   events: CalendarEvent[] = [];
   tasks : Task[]
 
-  constructor (private taskService : TaskService)
+  constructor (private taskService : TaskService, private datePipe : DatePipe, private router : Router)
   {
     this.getAllTasks();
   }
  
-  openDayList()
-  {
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    
+    const formattedDate = this.datePipe.transform(date, 'yyyy-MM-dd')
+    this.router.navigate([`to-do/${formattedDate}`]);
 
   }
+
 
   private getAllTasks()
   {
@@ -39,6 +44,8 @@ export class CalendarViewComponent {
       }
     )
   }
+
+
 
 
 }

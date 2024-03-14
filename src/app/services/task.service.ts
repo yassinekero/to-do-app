@@ -29,12 +29,17 @@ export class TaskService {
   {
     return this.http.delete<Task>(`${this.baseUrl}/${id}`);
   }
+  getAllTasks() : Observable<Task[]>
+  {
+  return this.http.get<Task[]>(`${this.baseUrl}`);
+  }
   getTodayTasks() : Observable<Task[]>
   {
    return this.http.get<Task[]>(`${this.baseUrl}/today`);
   }
-  getAllTasks() : Observable<Task[]>
+ 
+  getTasksByDate(date : string) : Observable<Task[]>
   {
-  return this.http.get<Task[]>(`${this.baseUrl}`);
+    return this.http.get<Task[]>(`${this.baseUrl}/date/${date}`)
   }
 }

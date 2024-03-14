@@ -1,12 +1,12 @@
 import { Component, HostListener } from '@angular/core';
 import { ToDoList } from '../../interfaces/to-do-list';
 import { ToDoListService } from '../../services/to-do-list.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from '../../interfaces/task';
 import { TaskService } from '../../services/task.service';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { FormsModule } from '@angular/forms';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass, NgFor } from '@angular/common';
 import { TaskTimeComponent } from '../task-time/task-time.component';
 import { taskIntializer } from '../../utils/tasks-utils';
 import { PrioritiesComponent } from '../priorities/priorities.component';
@@ -14,7 +14,8 @@ import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { TimeFormatConverterPipe } from '../../pipes/time-format-converter.pipe';
 import { DataService } from '../../services/data.service';
 import { OptionsDropdownComponent } from '../options-dropdown/options-dropdown.component';
-
+import { isValidDate } from '../../utils/utils';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-to-do-list',
   standalone: true,
@@ -27,15 +28,31 @@ import { OptionsDropdownComponent } from '../options-dropdown/options-dropdown.c
       PrioritiesComponent,
       CustomDatePipe,
       TimeFormatConverterPipe,
-      OptionsDropdownComponent
+      OptionsDropdownComponent, NgFor
 
     ],
+   animations : 
+   [
+    trigger('taskAnim',
+    [
+      transition(':leave', [
+        animate(200, style(
+          {
+            opacity : 0, 
+            transform: 'translateX(-30%)',
+            height : 0,
+            marginBottom : 0
+          }
+        ))
+      ])
+    ])
+   ],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
 })
 export class ToDoListComponent {
 
-  
+
   ToDoList: ToDoList =
     {
       title: "",
@@ -43,56 +60,59 @@ export class ToDoListComponent {
       days: []
 
     }
-    allToDoLists : ToDoList[]
-     newTask: Task;
+  allToDoLists: ToDoList[]
+  newTask: Task;
   displayStyle = "none";
   displayTimePickerStyle = "none";
   priorities = ["None", "Low", "Medium", "High", "Urgent"]
-  
+  listDate: string;
   selectedTask: Task;
+  urlId: any;
 
-  constructor(private ToDoListService: ToDoListService, private taskService: TaskService, private dataService : DataService, private route: ActivatedRoute, private datePipe: DatePipe) { }
+  constructor(private ToDoListService: ToDoListService, private taskService: TaskService, private customDate: CustomDatePipe, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
 
   ngOnInit(): void {
 
     this.getAllToDoLists();
-    const id = this.route.snapshot.params["id"];
-    if (id == "today") {
-      this.ToDoList.title = "Today"
-      this.getTodayTasks();
-      this.newTask = taskIntializer(this.newTask, 0 , this.datePipe)
+    this.urlId = this.route.snapshot.params["id"];
+
+    if (isValidDate(this.urlId)) {
+      this.listDate = this.urlId;
+      this.ToDoList.title = this.customDate.transform(this.urlId);
+      this.getTasksByDate(this.urlId);
+      this.newTask = taskIntializer(this.newTask, 0, this.urlId, this.datePipe)
     }
     else {
-      this.getToDoList(id)
-      this.newTask = taskIntializer(this.newTask, id, this.datePipe)
+      this.getToDoList(this.urlId)
+      this.newTask = taskIntializer(this.newTask, this.urlId, undefined, this.datePipe)
     }
   }
-  getTodayTasks() {
-    this.taskService.getTodayTasks().subscribe(
+
+  getTasksByDate(date: string) {
+    this.taskService.getTasksByDate(date).subscribe(
       {
         next: (res) => {
           if (this.ToDoList)
             this.ToDoList.tasks = res;
         },
-        error : (err) => console.log(err)
+        error: (err) => console.log(err)
       }
     )
   }
-  getAllToDoLists()
-  {
+  getAllToDoLists() {
     this.ToDoListService.getAllTodoLists().subscribe(
       {
-        next : res => this.allToDoLists = res,
-        error : err => console.log(err)
+        next: res => this.allToDoLists = res,
+        error: err => console.log(err)
       })
   }
   getToDoList(id: string): void {
     this.ToDoListService.getToDoList(id).subscribe(
       {
         next: (res) => {
-          if(res)
-          this.ToDoList = res;
+          if (res)
+            this.ToDoList = res;
         }
         ,
         error: (err) => console.log(err)
@@ -100,29 +120,31 @@ export class ToDoListComponent {
     )
   }
   addTask() {
-    const  today = new Date().toISOString().slice(0, 10);
     this.taskService.createTask(this.newTask).subscribe(
       {
         next: (res) => {
-         
-          if(this.ToDoList.id == null && this.newTask.startDate != today)
-          {
-            this.newTask = taskIntializer(this.newTask, 0, this.datePipe)
+
+
+          if (isValidDate(this.urlId)) {
+            if (this.newTask.startDate != this.listDate) {
+              this.newTask = taskIntializer(this.newTask, 0, this.newTask.startDate, this.datePipe)
+            }
+            else {
+              this.ToDoList.tasks.push(res);
+              this.newTask = taskIntializer(this.newTask, 0, this.newTask.startDate, this.datePipe)
+            }
           }
-          else if(this.ToDoList.id == null && this.newTask.startDate == today)
-          {
-            this.ToDoList.tasks.push(res);
-            this.newTask = taskIntializer(this.newTask, 0, this.datePipe)
+          else {
+            if (this.newTask.toDoListId != this.ToDoList.id) {
+              this.newTask = taskIntializer(this.newTask, this.ToDoList.id, this.newTask.startDate, this.datePipe)
+            }
+            else {
+              this.ToDoList.tasks.push(res);
+              this.newTask = taskIntializer(this.newTask, this.ToDoList.id, this.newTask.startDate, this.datePipe)
+            }
           }
-          if(this.newTask.toDoListId != this.ToDoList.id)
-          {
-            this.newTask = taskIntializer(this.newTask, this.ToDoList.id, this.datePipe)
-          }
-          else
-          {
-            this.ToDoList.tasks.push(res);
-            this.newTask = taskIntializer(this.newTask, this.ToDoList.id, this.datePipe)
-          }
+
+
 
         },
         error: err => console.log(err)

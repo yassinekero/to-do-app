@@ -52,6 +52,7 @@
   }
   .cal-month-view .cal-day-cell {
     min-height: 100px;
+    cursor: pointer;
   }
   .cal-month-view .cal-day-cell:not(:last-child) {
     border-right: 1px solid;
@@ -146,6 +147,7 @@
   
   .cal-month-view {
     background-color: #fff;
+
   }
   .cal-month-view .cal-cell-row:hover {
     background-color: #fafafa;
@@ -180,7 +182,7 @@
     color: #8b0000;
   }
   .cal-month-view .cal-day-cell.cal-today {
-    background-color: #e8fde7;
+    background-color: $secondary-color;
   }
   .cal-month-view .cal-day-cell.cal-drag-over {
     background-color: #e0e0e0 !important;
@@ -216,6 +218,7 @@
             flex: 1;
     text-align: center;
     padding: 5px;
+
   }
   .cal-week-view .cal-day-headers .cal-header:not(:last-child) {
     border-right: 1px solid;

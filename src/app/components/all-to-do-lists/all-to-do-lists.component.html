@@ -1,10 +1,19 @@
-<div class="grid-container">
+<div id="wrapper">
 
-    @for (toDoList of toDoLists; track $index) 
-  {
-   <app-to-do-list routerLink="/to-do/{{toDoList.id}}" class="card" [toDoList]="toDoList"></app-to-do-list>
-  }
+  <div class="add-list">
+    <div id="to-do-input">
+      <input id="title-input" type="text" name="to-do-title" placeholder="+  Add New List" (keyup.enter)="addList()">
+      <div class="options" id="time-options">
 
-  <a class="card" id="add-todo" routerLink="to-do/create">+</a>
+        </div>
+    </div>
+    <div class="grid-container">
 
+      @for (toDoList of toDoLists; track $index)
+      {
+      <app-to-do-list routerLink="/to-do/{{toDoList.id}}" class="card" [toDoList]="toDoList"></app-to-do-list>
+      }
+
+  
+    </div>
   </div>

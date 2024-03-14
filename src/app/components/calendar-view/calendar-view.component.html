@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div id="wrapper">
 
 
     <div class="top-bar">
@@ -6,7 +6,7 @@
         <div class="cal-button">
             <div class="cal-date-nav-button">
                 <button id="previous"  mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="view">Previous</button>
-                <button id="today"mwlCalendarToday [(viewDate)]="viewDate">Today</button>
+                <button id="today" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
                 <button id="next"  mwlCalendarNextView [(viewDate)]="viewDate" [view]="view">Next</button>
             </div>
         </div>
@@ -14,7 +14,7 @@
 
   @if(tasks)
   {
-    <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" (dayClicked)="openDayList()">
+    <mwl-calendar-month-view  id="calendar"[viewDate]="viewDate" [events]="events" (dayClicked)="dayClicked($event.day)">
 
     </mwl-calendar-month-view>
   }

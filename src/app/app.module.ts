@@ -12,6 +12,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { TimeFormatConverterPipe } from './pipes/time-format-converter.pipe';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 @NgModule({
@@ -29,12 +30,13 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
     BrowserAnimationsModule,
     AppRoutingModule,
  HttpClientModule,
+ TimeFormatConverterPipe,
     CalendarModule.forRoot({
       provide : DateAdapter,
       useFactory : adapterFactory
     })
   ],
-  providers: [DatePipe, CustomDatePipe],
+  providers: [DatePipe, CustomDatePipe, TimeFormatConverterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

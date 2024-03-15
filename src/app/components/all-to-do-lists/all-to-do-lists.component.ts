@@ -5,6 +5,7 @@ import { ToDoListService } from '../../services/to-do-list.service';
 import { CreateToDoListComponent } from '../create-to-do-list/create-to-do-list.component';
 import { RouterLink } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-all-to-do-lists',
@@ -13,7 +14,7 @@ import { RouterOutlet } from '@angular/router';
     ToDoListDetailsComponent,
     RouterLink, 
     CreateToDoListComponent, 
-    RouterOutlet
+    RouterOutlet, FormsModule
   ],
   templateUrl: './all-to-do-lists.component.html',
   styleUrl: './all-to-do-lists.component.scss'
@@ -21,6 +22,13 @@ import { RouterOutlet } from '@angular/router';
 export class AllToDoListsComponent {
 
   public toDoLists !:  ToDoList[];
+  newToDoList: ToDoList =
+  {
+    title: "",
+    tasks: [],
+    days: []
+
+  }
   constructor(private ToDoListService : ToDoListService)
   {
   
@@ -45,10 +53,18 @@ export class AllToDoListsComponent {
    }
 
 
-   addList()
-   {
-    
-   }
+  addList()
+  {
+    this.ToDoListService.createToDoList(this.newToDoList).subscribe(
+      {
+        next : res => {
+        console.log(res);
+         this.toDoLists.push(res)
+        },
+        error : err=> console.log(err)
+      })
+  }
+   
 
    
 }

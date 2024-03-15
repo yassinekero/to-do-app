@@ -25,7 +25,7 @@ background-color: $background-color;
 #outlet
 {
   flex: 1;
-    height: 100vh;
+ height: 100vh;
 }
 
 #menu-wrapper {
@@ -96,7 +96,7 @@ img {
 
 }
 
-router-outlet 
+main 
 {
-    height: 100vh;
+    position: relative;
 }

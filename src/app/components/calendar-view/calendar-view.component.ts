@@ -5,7 +5,7 @@ import { Task } from '../../interfaces/task';
 import { TasksToCalendarEvents } from '../../utils/utils';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { priorityColors } from '../../utils/colors';
 @Component({
   selector: 'app-calendar-view',
   templateUrl: './calendar-view.component.html',
@@ -13,36 +13,58 @@ import { Router } from '@angular/router';
 })
 export class CalendarViewComponent {
 
-  viewDate : Date = new Date();
-  view : CalendarView = CalendarView.Month; 
+  viewDate: Date = new Date();
+  view: CalendarView = CalendarView.Month;
   events: CalendarEvent[] = [];
-  tasks : Task[]
+  tasks: Task[]
 
-  constructor (private taskService : TaskService, private datePipe : DatePipe, private router : Router)
-  {
+
+
+  constructor(private taskService: TaskService, private datePipe: DatePipe, private router: Router) {
     this.getAllTasks();
   }
- 
+
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    
+
     const formattedDate = this.datePipe.transform(date, 'yyyy-MM-dd')
     this.router.navigate([`to-do/${formattedDate}`]);
 
   }
 
 
-  private getAllTasks()
-  {
+  private getAllTasks() {
     this.taskService.getAllTasks().subscribe(
       {
-        next : (res) =>
-        {
+        next: (res) => {
           this.tasks = res
           TasksToCalendarEvents(this.tasks, this.events)
         },
-        error : err => console.log(err)
+        error: err => console.log(err)
       }
     )
+  }
+
+  setBgColor(priority: string) {
+    let bgColor = ""
+    switch (priority) {
+      case "None":
+        bgColor = priorityColors.grey
+        break
+      case "Low":
+        bgColor = priorityColors.green
+        break
+      case "Medium":
+        bgColor = priorityColors.yellow
+        break
+      case "High":
+        bgColor = priorityColors.orange
+        break
+      case "Urgent":
+        bgColor = priorityColors.red
+        break
+    }
+
+    return bgColor;
   }
 
 

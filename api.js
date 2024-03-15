@@ -98,7 +98,9 @@ app.post('/to-do-lists', (req, res) => {
             console.error(err.message);
             res.status(500).json({ error: 'Internal Server Error' });
         } else {
-            res.status(201).json({ id: this.lastID });
+            const toDoListId = this.lastID;
+            const newList = { id: toDoListId, title, days };
+            res.status(201).json(newList);
         }
     });
 });

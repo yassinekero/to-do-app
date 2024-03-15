@@ -1,5 +1,6 @@
 import { CalendarEvent } from "angular-calendar";
 import { Task } from "../interfaces/task";
+import { tick } from "@angular/core/testing";
 
 
 export type strundef = string | undefined;
@@ -13,7 +14,9 @@ export function TasksToCalendarEvents(task : Task[], events : CalendarEvent[])
         {
           title :task.title,
           start : new Date(task.startDate),
-          end : new Date(task.startDate)
+          end : new Date(task.startDate),
+          startTime : task.startTime,
+          priority : task.priority
         }
         events.push(event);
     }

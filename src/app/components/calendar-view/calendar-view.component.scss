@@ -11,35 +11,59 @@
     scrollbar-width: none;
 }
 
-.top-bar 
-{
+.top-bar {
     padding-top: 15px;
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     align-items: center;
     padding-left: 20px;
     position: relative;
 }
-#calendar 
+
+.task {
+    font-size: 12px;
+    width: 95%;
+    margin: 0 auto;
+
+    div {
+        color: #4e4c4c;
+        margin-bottom: 2px;
+        border-radius: 5px;
+        padding:.2px 5px 0px 5px;
+
+    }
+}
+
+.task-container {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.task-title 
 {
 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-.current-view-date 
-{
+
+.current-view-date {
     font-size: 35px;
     color: $primary-color;
 }
-.cal-date-nav-button
-{
+
+.cal-date-nav-button {
     border: 1px solid $primary-color;
- 
+
     display: flex;
-     margin-right: 50px;
+    margin-right: 50px;
 }
-button
-{
+
+button {
     cursor: pointer;
     background-color: transparent;
     outline: none;
@@ -53,15 +77,16 @@ button
     font-family: "century-gothic", sans-serif;
     font-weight: bold;
 }
-#today 
-{
+
+#today {
     border-left: 1px solid $primary-color !important;
     border-right: 1px solid $primary-color !important;
-    
+
 }
-#previous , #next
-{
-   border-right: 0px;
-   background-color: #18666d;
-   color: white;
+
+#previous,
+#next {
+    border-right: 0px;
+    background-color: #18666d;
+    color: white;
 }

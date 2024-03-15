@@ -5,7 +5,6 @@ import { ToDoList } from '../../interfaces/to-do-list';
 import { ToDoListService } from '../../services/to-do-list.service';
 import { TaskService } from '../../services/task.service';
 import { strundef } from '../../utils/utils';
-import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-create-to-do-list',

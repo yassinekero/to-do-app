@@ -2,7 +2,7 @@
 
   <div class="add-list">
     <div id="to-do-input">
-      <input id="title-input" type="text" name="to-do-title" placeholder="+  Add New List" (keyup.enter)="addList()">
+      <input id="title-input" [(ngModel)]="newToDoList.title" type="text" name="to-do-title" placeholder="+  Add New List" (keyup.enter)="addList()">
       <div class="options" id="time-options">
 
         </div>

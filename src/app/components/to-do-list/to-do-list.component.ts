@@ -8,7 +8,7 @@ import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, NgClass, NgFor } from '@angular/common';
 import { TaskTimeComponent } from '../task-time/task-time.component';
-import { taskIntializer } from '../../utils/tasks-utils';
+import { orderTasks, taskIntializer } from '../../utils/tasks-utils';
 import { PrioritiesComponent } from '../priorities/priorities.component';
 import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { TimeFormatConverterPipe } from '../../pipes/time-format-converter.pipe';
@@ -31,22 +31,22 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       OptionsDropdownComponent, NgFor
 
     ],
-   animations : 
-   [
-    trigger('taskAnim',
+  animations:
     [
-      transition(':leave', [
-        animate(200, style(
-          {
-            opacity : 0, 
-            transform: 'translateX(-30%)',
-            height : 0,
-            marginBottom : 0
-          }
-        ))
-      ])
-    ])
-   ],
+      trigger('taskAnim',
+        [
+          transition(':leave', [
+            animate(200, style(
+              {
+                opacity: 0,
+                transform: 'translateX(-30%)',
+                height: 0,
+                marginBottom: 0
+              }
+            ))
+          ])
+        ])
+    ],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
 })
@@ -94,12 +94,13 @@ export class ToDoListComponent {
       {
         next: (res) => {
           if (this.ToDoList)
-            this.ToDoList.tasks = res;
+            this.ToDoList.tasks = orderTasks(res);
         },
         error: (err) => console.log(err)
       }
     )
   }
+
   getAllToDoLists() {
     this.ToDoListService.getAllTodoLists().subscribe(
       {
@@ -111,8 +112,11 @@ export class ToDoListComponent {
     this.ToDoListService.getToDoList(id).subscribe(
       {
         next: (res) => {
-          if (res)
+          if (res) {
             this.ToDoList = res;
+            this.ToDoList.tasks = orderTasks(res.tasks);
+          }
+
         }
         ,
         error: (err) => console.log(err)
@@ -144,7 +148,7 @@ export class ToDoListComponent {
             }
           }
 
-
+          this.ToDoList.tasks = orderTasks(this.ToDoList.tasks)
 
         },
         error: err => console.log(err)
@@ -159,6 +163,7 @@ export class ToDoListComponent {
     else {
       task.completed = true;
     }
+    this.ToDoList.tasks = orderTasks(this.ToDoList.tasks)
     this.taskService.updateTask(task.id, task).subscribe(
       {
         next: res => console.log(res),

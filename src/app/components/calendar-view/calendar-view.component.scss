@@ -90,3 +90,13 @@ button {
     background-color: #18666d;
     color: white;
 }
+
+
+img 
+{
+    filter: $primary-color-filter;
+    width: 12px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 1px;
+}

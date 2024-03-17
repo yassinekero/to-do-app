@@ -28,7 +28,7 @@ export class CreateToDoListComponent {
     {
       title: "",
       tasks: [],
-      days: [0, 2]
+      days: []
 
     }
 
@@ -36,22 +36,6 @@ export class CreateToDoListComponent {
 
   }
 
-  /*
-  clickAddTask(): void {
-    let newTask: Task =
-    {
-      title: "",
-      description: "",
-      startTime: new Date(),
-      endTime: new Date(),
-      completed: false,
-      tag: ""
-    }
-    this.tasks.push(newTask);
-
-  }
- 
-*/
   onSubmit()
   {
     this.toDoListService.createToDoList(this.newToDoList).subscribe(

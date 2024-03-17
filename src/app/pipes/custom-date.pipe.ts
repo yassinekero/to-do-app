@@ -11,7 +11,9 @@ export class CustomDatePipe implements PipeTransform {
   transform(value: string | undefined):  string {
     const today = new Date();
     const tomorrow = new Date();
+    const yesterday = new Date ();
     tomorrow.setDate(tomorrow.getDate() + 1);
+    yesterday.setDate(yesterday.getDate() - 1)
     if(!value)
     {
       return "Unset"
@@ -24,7 +26,10 @@ export class CustomDatePipe implements PipeTransform {
     {
       return 'Tomorrow';
     }
-   
+   else if (value === this.datePipe.transform(yesterday, "yyyy-MM-dd"))
+   {
+   return 'Yesterday'
+   }
     else 
     {
       return (String) (this.datePipe.transform(value,"MMMM dd"));

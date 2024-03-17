@@ -18,7 +18,8 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
 @NgModule({
   declarations: [
     AppComponent,
-    CalendarViewComponent
+    CalendarViewComponent,
+ 
   ],
   imports: [
     CommonModule,

@@ -37,7 +37,7 @@
       </div>
     </div>
     <div id="tasks-wrapper">
-  
+
 
       <div *ngFor="let task of ToDoList.tasks" class="task" @taskAnim>
 
@@ -64,7 +64,8 @@
         }
 
 
-        <div class="task-title" (click)="displayTaskDetails(task)">{{task.title}}</div>
+        <div class="task-title" [ngClass]="{ 'completed': task.completed }" (click)="displayTaskDetails(task)">
+          {{task.title}}</div>
 
         <div class="checkbox-wrapper">
           <label class="checkbox">
@@ -80,7 +81,7 @@
         </div>
       </div>
 
-      
+
     </div>
   </div>
   <div id="task-detail-section">

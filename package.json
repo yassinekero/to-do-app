@@ -1,12 +1,15 @@
 {
   "name": "to-do-list",
   "version": "0.0.0",
+  "main" : "app.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron" : "electron .",
+    "electron-build" : "ng build && electron ."
   },
   "private": true,
   "dependencies": {

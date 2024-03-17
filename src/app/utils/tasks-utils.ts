@@ -22,3 +22,17 @@ export function taskIntializer(task: Task, id: number | undefined, startdate: st
 
   return task;
 }
+
+export function  orderTasks(tasks : Task[])
+{
+  tasks.sort((a, b) => {
+    if (a.completed && !b.completed) {
+        return 1;
+    } else if (!a.completed && b.completed) {
+        return -1; 
+    } else {
+        return 0; 
+    }
+});
+return tasks;
+}

@@ -1,41 +1,42 @@
 <ng-template #customCellTemplate let-day="day" let-locale="locale">
   <div class="cal-cell-top">
-  
-    <span class="cal-day-number"
-      >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
-    >
+
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
   <div>
     <div class="task" *ngFor="let event of day.events.slice(0, 4)">
       <div [style.backgroundColor]="setBgColor(event.priority)" class="task-container">
-        <div  class="task-title">{{event.title}} </div>  
+        <div class="task-title">{{event.title}} </div>
         <div>{{event.startTime | timeFormatConverter}}</div>
       </div>
 
+    </div>
   </div>
-  </div>
+    <!-- <img src="../../../assets/icons/more-icon.png">
+     --> 
 
 </ng-template>
 
 <div id="wrapper">
 
 
-    <div class="top-bar">
-        <div class="current-view-date">{{viewDate | calendarDate:(view + 'ViewTitle') : 'en'}}</div>
-        <div class="cal-button">
-            <div class="cal-date-nav-button">
-                <button id="previous"  mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="view">Previous</button>
-                <button id="today" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
-                <button id="next"  mwlCalendarNextView [(viewDate)]="viewDate" [view]="view">Next</button>
-            </div>
-        </div>
+  <div class="top-bar">
+    <div class="current-view-date">{{viewDate | calendarDate:(view + 'ViewTitle') : 'en'}}</div>
+    <div class="cal-button">
+      <div class="cal-date-nav-button">
+        <button id="previous" mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="view">Previous</button>
+        <button id="today" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
+        <button id="next" mwlCalendarNextView [(viewDate)]="viewDate" [view]="view">Next</button>
+      </div>
     </div>
+  </div>
 
   @if(tasks)
   {
-    <mwl-calendar-month-view [cellTemplate]="customCellTemplate"  id="calendar"[viewDate]="viewDate" [events]="events" (dayClicked)="dayClicked($event.day)">
+  <mwl-calendar-month-view [cellTemplate]="customCellTemplate" id="calendar" [viewDate]="viewDate" [events]="events"
+    (dayClicked)="dayClicked($event.day)">
 
-    </mwl-calendar-month-view>
+  </mwl-calendar-month-view>
   }
 
 </div>

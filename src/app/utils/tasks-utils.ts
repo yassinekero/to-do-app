@@ -1,5 +1,6 @@
 import { DatePipe } from "@angular/common";
 import { Task } from "../interfaces/task";
+import { retry } from "rxjs";
 
 export function DateToString(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
@@ -23,16 +24,41 @@ export function taskIntializer(task: Task, id: number | undefined, startdate: st
   return task;
 }
 
-export function  orderTasks(tasks : Task[])
-{
+export function orderTasks(tasks: Task[]) {
+  tasks.sort((a, b) => {
+    if (a.startTime && b.startTime) {
+      if (a.startTime > b.startTime) {
+        return 1
+      }
+      else if (a.startTime < b.startTime) {
+        return -1
+      }
+      else {
+        return 0
+      }
+    }
+    else {
+      if (a.startTime && !b.startTime) {
+        return -1
+      }
+      else if (!a.startTime && b.startTime) {
+        return 1
+      }
+      else {
+        return 0;
+      }
+    }
+
+  })
   tasks.sort((a, b) => {
     if (a.completed && !b.completed) {
-        return 1;
+      return 1;
     } else if (!a.completed && b.completed) {
-        return -1; 
+      return -1;
     } else {
-        return 0; 
+      return 0;
     }
-});
-return tasks;
+  });
+
+  return tasks;
 }

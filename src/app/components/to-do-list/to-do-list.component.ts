@@ -12,7 +12,6 @@ import { orderTasks, taskIntializer } from '../../utils/tasks-utils';
 import { PrioritiesComponent } from '../priorities/priorities.component';
 import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { TimeFormatConverterPipe } from '../../pipes/time-format-converter.pipe';
-import { DataService } from '../../services/data.service';
 import { OptionsDropdownComponent } from '../options-dropdown/options-dropdown.component';
 import { isValidDate } from '../../utils/utils';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -73,6 +72,7 @@ export class ToDoListComponent {
 
 
   ngOnInit(): void {
+
 
     this.getAllToDoLists();
     this.urlId = this.route.snapshot.params["id"];

@@ -1,0 +1,36 @@
+@import "../../styles/checkbox-styles.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/checkbox-styles.scss";
+@import '../../styles/button-styles.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+#wrapper::-webkit-scrollbar {
+    display: none;
+    
+}
+
+#wrapper {
+    height: 100vh !important;
+    background-color: $background-color;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+h1 {
+    color: $primary-color;
+    font-size: 40px;
+    padding-left: 2.5%;
+    padding-top: 1%;
+
+}
+#timer 
+{
+    margin: 0 auto;
+    width: fit-content;
+}

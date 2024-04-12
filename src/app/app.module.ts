@@ -19,6 +19,7 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
   declarations: [
     AppComponent,
     CalendarViewComponent,
+
  
   ],
   imports: [

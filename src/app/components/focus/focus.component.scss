@@ -21,16 +21,38 @@
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 h1 {
     color: $primary-color;
     font-size: 40px;
     padding-left: 2.5%;
     padding-top: 1%;
+     
+
+}
+.section 
+{
 
 }
 #timer 
 {
-    margin: 0 auto;
-    width: fit-content;
+ 
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+#app-timer 
+{
+    width: 100%;
+    height: 100%;
+ 
+}
+#overview 
+{
+    width: 40%;
 }

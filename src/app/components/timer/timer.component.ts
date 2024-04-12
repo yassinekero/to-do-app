@@ -1,39 +1,51 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { TimerFormatPipe } from '../../pipes/timer-format.pipe';
+import { TimerService } from '../../services/timer.service';
 @Component({
   selector: 'app-timer',
   standalone: true,
   templateUrl: './timer.component.html',
-  imports : 
-  [DatePipe],
+  imports:
+    [DatePipe, NgClass, TimerFormatPipe],
   styleUrl: './timer.component.scss'
 })
-export class TimerComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    this.timerLoop =  setInterval(() => this.countDownTimer());
-    this.countDownTimer();
-  }
-
+export class TimerComponent implements OnInit {
 
   @ViewChild('sc1') sc1: ElementRef;
   @ViewChild('sc2') sc2: ElementRef;
   @ViewChild('sc3') sc3: ElementRef;
-  @ViewChild('timer') timer : ElementRef;
+
+  public isTimer = false;
+  private setTime : number = 0;
+  private timerLoop: any;
+  remainingTime: number;
+  constructor(private timerService: TimerService) {
+
+  }
+  ngOnInit(): void {
+   this.remainingTime = this.setTime;
+  }
+
+  ngAfterViewInit(): void {
 
 
-  min = 1;
-  minutes = this.min * 60000;
-  setTime =  this.minutes;
-  startTime = Date.now();
-  futureTime = this.startTime + this.setTime;
-  timerLoop : any;
-  remainingTime : any; 
+    setTimeout(() => {
+      if (this.timerService.isOn) {
+        this.isTimer = true;
+        this.timerLoop = setInterval(() => this.countDownTimer());
+        this.countDownTimer();
+      }
+    }, 0)
+
+  }
+
 
   countDownTimer() {
-    const currentTime = Date.now();
-    this.remainingTime = this.futureTime - currentTime;
-    const angle = (this.remainingTime / this.setTime) * 360;
+
+    this.remainingTime = this.timerService.getRemainingTime();
+    const angle = (this.remainingTime / this.timerService.getSetTime()) * 360;
     if (angle > 180) {
       this.sc3.nativeElement.style.display = "none";
       this.sc1.nativeElement.style.transform = "rotate(180deg)";
@@ -43,16 +55,25 @@ export class TimerComponent implements AfterViewInit {
       this.sc3.nativeElement.style.display = "block";
       this.sc1.nativeElement.style.transform = `rotate(${angle}deg)`;
       this.sc2.nativeElement.style.transform = `rotate(${angle}deg)`;
-    }
-
-    if(this.remainingTime < 0)
-    {
-      clearInterval(this.timerLoop)
-      this.sc1.nativeElement.style.display = "none";
       this.sc2.nativeElement.style.display = "none";
-      this.sc3.nativeElement.style.display = "none";
-      this.remainingTime = 0;
     }
+    if (this.remainingTime <= 0) {
+      clearInterval(this.timerLoop)
+      this.isTimer = false
+    }
+  }
+
+  startTimer() {
+    this.isTimer = true;
+    this.setTime = 0.1;
+    this.timerService.startTimer(this.setTime);
+    this.timerLoop = setInterval(() => this.countDownTimer());
+    this.countDownTimer();
+
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.timerLoop)
   }
 
 }

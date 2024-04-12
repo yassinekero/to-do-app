@@ -8,11 +8,13 @@
 
 .wrapper {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-   
+    position: relative;
+
 }
 
 .center {
@@ -23,13 +25,20 @@
 }
 
 .circle-container {
-    width: 400px;
-    height: 400px;
+    width: 330px;
+    height: 330px;
     background-color: #ddd;
     border-radius: 50%;
-    position: absolute;
+    position: relative;
     z-index: 1;
-    overflow: hidden;
+    overflow: hidden !important;
+}
+.main-container 
+{
+    width: fit-content;
+    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .semicircle {
@@ -39,11 +48,14 @@
     top: 0;
     left: 0;
     transform-origin: right center;
+    display: none;
+
 }
 
 .semicircle:nth-child(1) {
     background-color: $primary-color;
     z-index: 2;
+
 }
 
 .semicircle:nth-child(2) {
@@ -54,33 +66,32 @@
 .semicircle:nth-child(3) {
     background-color: #ddd;
     z-index: 4;
-  
+
 }
 
 .outermost-circle {
-    width: 390px;
-    height: 390px;
+    width: 305px;
+    height: 305px;
     border-radius: 50%;
     background-color: $background-color;
     z-index: 5;
 }
 
-.timer-container
-{
-    width: 330px;
-    height: 200px;
+.timer-container {
+    width: fit-content;
     z-index: 6;
+    position: absolute;
 }
-.timer 
-{
-    width: 400px;
+
+.timer {
+    width: fit-content;
     height: 100px;
 
-    z-index: 7 ;
-    div 
-    {
-        font-size:  70px;
-        font-weight:  100;
+    z-index: 7;
+
+    div {
+        font-size: 70px;
+        font-weight: 100;
         width: 80px;
         height: 80px;
         display: flex;
@@ -90,4 +101,15 @@
         color: $primary-color;
     }
 
+
+}
+
+.startTimer 
+{ 
+  display: block !important;
+}
+
+.actions 
+{
+    margin-top: 30px;
 }

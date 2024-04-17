@@ -54,7 +54,21 @@
             
          </div>
         <div class="actions center">
-            <button (click)="startTimer()">Start</button>
+            @if (isTimer)
+             {
+                
+                <img (click)="pauseTimer()" src="../../../assets/icons/pause-icon.png">
+                
+            
+                    <img (click)="resumeTimer()" src="../../../assets/icons/play-icon.png">
+            
+             }
+             @else {
+               
+                    <img (click)="startTimer()"src="../../../assets/icons/play-icon.png">
+
+             }
+          
         </div>
        
     </div>

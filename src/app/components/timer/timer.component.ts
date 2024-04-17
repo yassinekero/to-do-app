@@ -5,6 +5,7 @@ import { TimerFormatPipe } from '../../pipes/timer-format.pipe';
 import { TimerService } from '../../services/timer.service';
 import { FormsModule } from '@angular/forms';
 import e from 'cors';
+import { IntervalTimer } from '../../utils/interval-timer';
 @Component({
   selector: 'app-timer',
   standalone: true,
@@ -28,7 +29,7 @@ export class TimerComponent implements OnInit {
   public sessions: number[] = [25, 25];
   public leftSessions: number[] = this.sessions;
   public currentSessionCount: number = 1;
-  private _timerLoop: any;
+  private _timer: IntervalTimer;
   remainingTime: number;
   constructor(private timerService: TimerService) {
 
@@ -43,16 +44,16 @@ export class TimerComponent implements OnInit {
         this.isTimer = true;
         this.sessions = this.timerService.sessions;
         this.currentSessionCount = this.timerService.currentSessionCount;
-        this._timerLoop = setInterval(() => this.countDownTimer());
+        this._timer = new IntervalTimer(this.countDownTimer.bind(this), 0, this);
+        this._timer.start();
         this.countDownTimer();
       }
-      else if(this.timerService.isActive && !this.timerService.isOnPlay) 
-        {
-          this.sessions = this.timerService.sessions;
-          this.currentSessionCount = this.timerService.currentSessionCount;
-        }
+      else if (this.timerService.isActive && !this.timerService.isOnPlay) {
+        this.sessions = this.timerService.sessions;
+        this.currentSessionCount = this.timerService.currentSessionCount;
+      }
     }, 0)
-   
+
   }
   countDownTimer() {
     this.remainingTime = this.timerService.remainingTime;
@@ -70,26 +71,25 @@ export class TimerComponent implements OnInit {
     }
     this.fillCircleSession(this.remainingTime, this.timerService.duration, this.fillers.toArray()[this.currentSessionCount - 1])
     if (this.remainingTime <= 0) {
-      clearInterval(this._timerLoop)
+      this._timer.clear();
       this.isTimer = false
     }
-
+    
   }
 
   fillCircleSession(remainingTime: number, duration: number, currentFillerEle: ElementRef) {
     let moveDistance = 100 - ((remainingTime / duration) * 100);
     currentFillerEle.nativeElement.style.transform = `translateX(${moveDistance}%)`;
-
   }
   startTimer() {
 
     if (this.timerService.isActive) {
-      this.isTimer = true
+      this.isTimer = true;
       this.currentSessionCount = this.timerService.currentSessionCount;
       this.sessions = this.timerService.sessions;
-      console.log(this.timerService.currentSessionCount)
       this.timerService.startTimer();
-      this._timerLoop = setInterval(() => this.countDownTimer());
+      this._timer = new IntervalTimer(this.countDownTimer.bind(this), 0, this);
+      this._timer.start();
       this.countDownTimer();
       return;
     }
@@ -101,15 +101,21 @@ export class TimerComponent implements OnInit {
     }
     this.timerService.sessions = this.sessions;
     this.timerService.startTimer();
-    this._timerLoop = setInterval(() => this.countDownTimer());
+    this._timer = new IntervalTimer(this.countDownTimer.bind(this), 0, this);
+    this._timer.start();
     this.countDownTimer();
-
+  }
+  pauseTimer() {
+    this.timerService.pauseTimer();
+    this._timer.pause();
+  }
+  resumeTimer() {
+    this.timerService.resumeTimer();
+    this._timer.resume();
   }
 
-
-
   ngOnDestroy(): void {
-    clearInterval(this._timerLoop)
+    this._timer.clear();
   }
 
 }

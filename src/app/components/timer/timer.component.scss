@@ -23,6 +23,13 @@
     align-items: center;
 
 }
+img {
+    width: 70px;
+    filter: $primary-color-filter;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
 
 .circle-container {
     width: 330px;

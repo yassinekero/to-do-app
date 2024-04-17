@@ -5,50 +5,64 @@ import { Injectable } from '@angular/core';
 })
 export class TimerService {
 
+  private _remainingTime: number;
+  private _totalDuration : number;
+  private _duration: number = 25;
+  private _sessions : number[];
+  private _startTime: number;
+  private _currentSessionCount: number = 1;
+  private _futureTime: number;
+  private _timerLoop: any;
+  public isActive: boolean = false;
+  public isOnPlay : boolean = false;
 
-  private remainingTime : number;
-  private setTime : number = 0; 
-  private startTime : number;
-  private futureTime : number ;
-  private timerLoop : any;
-  public isOn : boolean = false;
-  constructor() { }
-
-  startTimer(time : number)
-  {
-    this.isOn = true;
-    this.setTime =  time * 60000;
-    this.startTime =  Date.now();
-    this.futureTime =  this.startTime + this.setTime
-    this.timerLoop =  setInterval(() => this.countDownTimer());
+  startTimer() {
+    this.isActive = true;
+    this.isOnPlay = true;
+    this._duration = this.sessions[this.currentSessionCount - 1]* 60000;
+    this._startTime = Date.now();
+    this._futureTime = this._startTime + this._duration
+    this._timerLoop = setInterval(() => this.countDownTimer());
     this.countDownTimer();
   }
-  resetTimer()
-  {
+  resetTimer() {
 
   }
-  getRemainingTime() : number
-  {
-    return this.remainingTime;
+  get remainingTime(): number {
+    return this._remainingTime;
   }
-   setTimeMethod(time : number) : void
-  {
-    this.setTime =  time * 60000;
+  get duration(): number {
+    return this._duration;
   }
-  
- 
-  getSetTime() : number
+  set duration(time: number) {
+    this._duration = time * 60000;
+  }
+
+  get currentSessionCount(): number {
+    return this._currentSessionCount;
+  }
+
+  set currentSessionCount(currentSessionCount: number) {
+    this._currentSessionCount = currentSessionCount;
+  }
+
+  get sessions() : number[]
   {
-    return this.setTime;
+    return this._sessions;
+  }
+  set sessions(sessions : number[])
+  {
+    this._sessions = sessions;
   }
   countDownTimer() {
 
     const currentTime = Date.now();
-    this.remainingTime = this.futureTime - currentTime;
-     if(this.remainingTime < 0 )
-    {
-      clearInterval(this.timerLoop)
-      this.remainingTime = 0;
+    this._remainingTime = this._futureTime - currentTime;
+    if (this._remainingTime < 0) {
+      clearInterval(this._timerLoop)
+      this._remainingTime = 0;
+      this._currentSessionCount++;
+      this.isOnPlay = false;
     }
 
   }

@@ -10,11 +10,53 @@
                 <div class="timer center">
                     <div>{{remainingTime | timerFormat}}</div>
                 </div>
+                <div class="timer-options">
+                    <div class="line">
+                        <div class="field">
+                            <label>Duration</label>
+                            <input type="number" [(ngModel)]="duration" min="5">
+                        </div>
+                        <div>
+                            <label>Sessions</label>
+                            <input type="number" [(ngModel)]="sessions.length" min="5">
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="field">
+                            <label>Pomo</label>
+                            <input type="number" [(ngModel)]="pomo" min="5" >
+                        </div>
+                        <div>
+                            <label>Break</label>
+                            <input type="number" [(ngModel)]="breakTime" min="5">
+                        </div>
+                    </div>
+                </div>
+                
             </div>
+            
         </div>
+        <div class="pomo-sessions center">
+           
+                @for (session of sessions; track $index)
+                 
+                {
+                 
+                    <div class="session-circle circle-container">
+                      
+                            <div class="filler" [ngClass]="{'filled' : $index < currentSessionCount - 1}" id="currentSession" #filler></div> 
+                         
+                    </div>
+                    
+                }
+               
+             
+            
+         </div>
         <div class="actions center">
             <button (click)="startTimer()">Start</button>
         </div>
+       
     </div>
   
 

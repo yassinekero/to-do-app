@@ -14,10 +14,13 @@ export class TimerService {
   private _currentSessionCount: number = 1;
   private _currentTime: number;
   private _pausedTime: number
+  private _breakTime : number;
   private _futureTime: number;
+  public isPaused : boolean;
   private _timer: IntervalTimer;
   public isActive: boolean = false;
   public isOnPlay: boolean = false;
+  public isBreak : boolean;
   private _pausedDuration : number;
   get remainingTime(): number {
     return this._remainingTime;
@@ -34,11 +37,20 @@ export class TimerService {
   set currentSessionCount(currentSessionCount: number) {
     this._currentSessionCount = currentSessionCount;
   }
+  get breakTime() : number
+  {
+    return this._breakTime
+  }
+  set breakTime(breakTime : number) 
+  {
+  this._breakTime = breakTime ;
+  } 
 
   startTimer() {
+    if(this.isBreak) this._duration = this._breakTime * 60000;
+    else  this._duration = this.sessions[this.currentSessionCount - 1] * 60000;
     this.isActive = true;
     this.isOnPlay = true;
-    this._duration = this.sessions[this.currentSessionCount - 1] * 60000;
     this._pausedTime = 0;
     this._startTime = Date.now();
     this._pausedDuration = 0;
@@ -50,12 +62,14 @@ export class TimerService {
   pauseTimer() {
     this._pausedTime = this._currentTime;
     this._timer.pause();
+    this.isPaused = true;
 
   }
   resumeTimer() {
     this._pausedDuration = Date.now() - this._pausedTime
     console.log(this._pausedDuration)
     this._timer.resume();
+    this.isPaused = false;
   }
   resetTimer() {
   }
@@ -66,14 +80,22 @@ export class TimerService {
     this._sessions = sessions;
   }
   countDownTimer() {
-      this._currentTime = Date.now() - this._pausedDuration;
-      this._remainingTime = this._futureTime - this._currentTime;
-      if (this._remainingTime < 0) {
-        this._remainingTime = 0;
-        this._currentSessionCount++;
-        this.isOnPlay = false;
-        this._timer.clear();
+   
+        this._currentTime = Date.now() - this._pausedDuration;
+        this._remainingTime = this._futureTime - this._currentTime;
+        if (this._remainingTime < 0) {
+         this._remainingTime = 0;
+         if (!this.isBreak)
+          { 
+            this._currentSessionCount++;
+            this.isBreak = true;
+          }
+          else this.isBreak = false
+          this.isOnPlay = false;
+          this._timer.clear();
+        }
       }
-    }
+   
+    
 
 }

@@ -1,78 +1,97 @@
 <div class="wrapper">
 
     <div class="main-container">
+
         <div class="circle-container center">
             <div class="semicircle" [ngClass]="{'startTimer' : isTimer }" #sc1></div>
-            <div class="semicircle" [ngClass]="{'startTimer' : isTimer }" #sc2></div>
+            <div class="semicPircle" [ngClass]="{'startTimer' : isTimer }" #sc2></div>
             <div class="semicircle" #sc3></div>
             <div class="outermost-circle"></div>
             <div class="timer-container center">
+
                 <div class="timer center">
-                    <div>{{remainingTime | timerFormat}}</div>
+
+                    <div (click)="showTimerOptions()">{{remainingTime | timerFormat}}</div>
                 </div>
-                <div class="timer-options">
-                    <div class="line">
-                        <div class="field">
-                            <label>Duration</label>
-                            <input type="number" [(ngModel)]="duration" min="5">
+
+                <div [ngClass]="{'isVisible' : isTimerOptions}" class="timer-options-wrapper">
+                    <div class="timer-options">
+                        <div class="line">
+                            <div class="field">
+                                <label>Duration</label>
+                                <input type="number" [(ngModel)]="duration" min="5">
+                            </div>
+                            <div class="field">
+                                <label>Pomo</label>
+                                <input type="number" [(ngModel)]="pomo" min="5">
+                            </div>
+
                         </div>
-                        <div>
-                            <label>Sessions</label>
-                            <input type="number" [(ngModel)]="sessions.length" min="5">
+                        <div class="line">
+                            <div class="field">
+                                <label>Sessions</label>
+                                <input type="number" [(ngModel)]="sessions.length" min="5">
+                            </div>
+                            <div class="field">
+                                <label>Break</label>
+                                <input type="number" [(ngModel)]="breakTime" min="5">
+                            </div>
                         </div>
+
+
                     </div>
-                    <div class="line">
-                        <div class="field">
-                            <label>Pomo</label>
-                            <input type="number" [(ngModel)]="pomo" min="5" >
-                        </div>
-                        <div>
-                            <label>Break</label>
-                            <input type="number" [(ngModel)]="breakTime" min="5">
-                        </div>
+                    <div class="btns">
+                        <button>Ok</button>
+                        <button>Cancel</button>
                     </div>
                 </div>
-                
+
+
             </div>
-            
+
         </div>
         <div class="pomo-sessions center">
-           
-                @for (session of sessions; track $index)
-                 
-                {
-                 
-                    <div class="session-circle circle-container">
-                      
-                            <div class="filler" [ngClass]="{'filled' : $index < currentSessionCount - 1}" id="currentSession" #filler></div> 
-                         
-                    </div>
-                    
-                }
-               
-             
-            
-         </div>
+
+            @for (session of sessions; track $index)
+
+            {
+
+            <div class="session-circle circle-container">
+
+                <div class="filler" [ngClass]="{'filled' : $index < currentSessionCount - 1}" id="currentSession"
+                    #filler></div>
+
+            </div>
+
+            }
+
+        </div>
         <div class="actions center">
             @if (isTimer)
-             {
-                
-                <img (click)="pauseTimer()" src="../../../assets/icons/pause-icon.png">
-                
-            
-                    <img (click)="resumeTimer()" src="../../../assets/icons/play-icon.png">
-            
-             }
-             @else {
-               
-                    <img (click)="startTimer()"src="../../../assets/icons/play-icon.png">
+            {
+            @if (isPaused)
 
-             }
-          
+            {
+            <img (click)="resumeTimer()" src="../../../assets/icons/play-icon.png">
+            <img (click)="resumeTimer()" src="../../../assets/icons/reset-icon.png">
+
+            }
+            @else {
+            <img (click)="pauseTimer()" src="../../../assets/icons/pause-icon.png">
+            }
+
+
+            }
+            @else {
+
+            <img (click)="startTimer()" src="../../../assets/icons/play-icon.png">
+
+            }
+
         </div>
-       
+
     </div>
-  
+
 
 
 

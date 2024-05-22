@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 import { TimerFormatPipe } from '../../pipes/timer-format.pipe';
 import { TimerService } from '../../services/timer.service';
 import { FormsModule } from '@angular/forms';
-import e from 'cors';
+
 import { IntervalTimer } from '../../utils/interval-timer';
 @Component({
   selector: 'app-timer',
@@ -29,7 +29,10 @@ export class TimerComponent implements OnInit {
   public sessions: number[] = [25, 25];
   public leftSessions: number[] = this.sessions;
   public currentSessionCount: number = 1;
+  public isTimerOptions : boolean = false;
   private _timer: IntervalTimer;
+  public isPaused: boolean;
+  public isBreak: boolean;
   remainingTime: number;
   constructor(private timerService: TimerService) {
 
@@ -43,6 +46,9 @@ export class TimerComponent implements OnInit {
       if (this.timerService.isActive && this.timerService.isOnPlay) {
         this.isTimer = true;
         this.sessions = this.timerService.sessions;
+        this.breakTime = this.timerService.breakTime;
+        this.isBreak = this.timerService.isBreak;
+        this.isPaused = this.timerService.isPaused;
         this.currentSessionCount = this.timerService.currentSessionCount;
         this._timer = new IntervalTimer(this.countDownTimer.bind(this), 0, this);
         this._timer.start();
@@ -50,12 +56,23 @@ export class TimerComponent implements OnInit {
       }
       else if (this.timerService.isActive && !this.timerService.isOnPlay) {
         this.sessions = this.timerService.sessions;
+        this.isBreak = this.timerService.isBreak;
         this.currentSessionCount = this.timerService.currentSessionCount;
       }
     }, 0)
 
   }
-  countDownTimer() {
+
+
+  submitTimerOptions(): void
+  {
+      
+  }
+  showTimerOptions() : void
+  {
+    this.isTimerOptions = true
+  }
+  countDownTimer()  : void{
     this.remainingTime = this.timerService.remainingTime;
     const angle = (this.remainingTime / this.timerService.duration) * 360;
     if (angle > 180) {
@@ -69,12 +86,14 @@ export class TimerComponent implements OnInit {
       this.sc2.nativeElement.style.transform = `rotate(${angle}deg)`;
       this.sc2.nativeElement.style.display = "none";
     }
-    this.fillCircleSession(this.remainingTime, this.timerService.duration, this.fillers.toArray()[this.currentSessionCount - 1])
+    if (!this.isBreak) this.fillCircleSession(this.remainingTime, this.timerService.duration, this.fillers.toArray()[this.currentSessionCount - 1])
     if (this.remainingTime <= 0) {
+      if (this.isBreak) this.isBreak = false;
+      else this.isBreak = true
       this._timer.clear();
       this.isTimer = false
     }
-    
+
   }
 
   fillCircleSession(remainingTime: number, duration: number, currentFillerEle: ElementRef) {
@@ -82,9 +101,8 @@ export class TimerComponent implements OnInit {
     currentFillerEle.nativeElement.style.transform = `translateX(${moveDistance}%)`;
   }
   startTimer() {
-
+    this.isTimer = true;
     if (this.timerService.isActive) {
-      this.isTimer = true;
       this.currentSessionCount = this.timerService.currentSessionCount;
       this.sessions = this.timerService.sessions;
       this.timerService.startTimer();
@@ -93,8 +111,8 @@ export class TimerComponent implements OnInit {
       this.countDownTimer();
       return;
     }
-    this.isTimer = true
     this.sessions = [];
+    this.timerService.breakTime = this.breakTime
     const sessionsCount = Math.ceil(this.duration / this.pomo);
     for (let i = 0; i < sessionsCount; i++) {
       this.sessions[i] = this.pomo;
@@ -106,15 +124,18 @@ export class TimerComponent implements OnInit {
     this.countDownTimer();
   }
   pauseTimer() {
+    this.isPaused = true
     this.timerService.pauseTimer();
     this._timer.pause();
   }
   resumeTimer() {
+    this.isPaused = false;
     this.timerService.resumeTimer();
     this._timer.resume();
   }
-
+  
   ngOnDestroy(): void {
+    if(this._timer)
     this._timer.clear();
   }
 

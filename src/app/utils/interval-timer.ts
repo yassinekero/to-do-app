@@ -1,6 +1,6 @@
 
 export class IntervalTimer {
-    private _intervalId: NodeJS.Timeout
+    private _intervalId: any;
     private _callback: Function;
     private _startTime: number;
     private _paused: boolean = false;
